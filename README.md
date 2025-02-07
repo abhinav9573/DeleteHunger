@@ -26,4 +26,4 @@ Let's work together to deletehunger and build a world where everyone has access 
 ![DeleteHunger Logo](https://github.com/Team-Samadhaan/Deletehunger/assets/166902861/063bac42-fa93-4d25-bd31-45f3d1858d7e)
 
 ## Certificate --Dexterix 4.0
-![dexterix 4 0](https://github.com/abhinav9573/Deletehunger--/assets/133889187/2f50ba53-8a65-489e-9fb5-8edc4c231c18)
+![dexterix 4 0](https://github.com/abhinav9573/DeleteHunger/blob/722bc041973b88fa382541380fad119f47c454a1/Dexterix%204.0%20Certificate.jpg)
