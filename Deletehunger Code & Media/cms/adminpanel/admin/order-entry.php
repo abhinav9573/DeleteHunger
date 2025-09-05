@@ -1,16 +1,16 @@
 <?php
 session_start();
 
-if(isset($_SESSION['id'])&& isset($_SESSION['user_name'])){
+if(isset($_SESSION['id'])&& isset($_SESSION['use_name'])){
     ?>
 
 <?php
-$servername="127.0.0.1:3306";
-$username="u130083126_deletehunger";
-$password="Deletehunger@2024";
-$databse="u130083126_deletehunger";
+$servername = "localhost";   // or 127.0.0.1
+$username   = "root";        // XAMPP default user
+$password   = "";            // blank by default
+$database   = "deletehunger";
 // create connection
-$connection=new mysqli($servername,$username,$password,$databse);
+$connection = new mysqli($servername, $username, $password, $database);
 
 
 $venue="";
@@ -61,7 +61,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
        
 
         $successMessage="Client added correctly";
-        header("location: log.php");
+        header("location: index.php");
         exit;
 
 
@@ -93,12 +93,14 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
       <i class="fa fa-remove"></i>
     </a>
     <img src="../img/logo.jpg" style="width:45%;" class="w3-round"><br><br>
-    <h4><b>Caterers Panel</b></h4>
-    <p class="w3-text-grey"><?php echo $_SESSION['user_name'] ?></p>
+    <h4><b>Admin Panel</b></h4>
+    <p class="w3-text-grey"><?php echo $_SESSION['use_name'] ?></p>
   </div>
   <div class="w3-bar-block">
-    <a href="#" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Order Details</a> 
-    <a href="log.php"  class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>Log</a> 
+    <a href="index.php" class="w3-bar-item w3-button w3-padding  "><i class="fa fa-user fa-fw w3-margin-right"></i>Log</a> 
+    <a   class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Order_entry</a>
+    <a href="new-register.php"  class="w3-bar-item w3-button w3-padding "><i class="fa fa-pencil-square-o fa-fw w3-margin-right"></i>New_register</a>
+    <a href="register.php"  class="w3-bar-item w3-button w3-padding "><i class="fa fa-align-justify fa-fw w3-margin-right"></i>Register</a> 
     <a href="../logout.php"  class="w3-bar-item w3-button w3-padding"><i class="fa fa-lock fa-fw w3-margin-right"></i>Logout</a>
   </div>
   
@@ -157,10 +159,17 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         <label for="people"> Food for number of people*</label>
       </div>
       <div class="col-75">
-        <input type="text" id="people" name="people" placeholder="Food for no of people" required>
+        <input type="text" id="people" name="people" placeholder="Food for number of people" required>
       </div>
     </div>
-    <input type="hidden" name="name" id="name" value="<?php echo $_SESSION['user_name'] ; ?>">
+    <div class="row">
+      <div class="col-25">
+        <label for="people"> Username*</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="name" name="name" placeholder="name" required>
+      </div>
+    </div>
     <div class="row">
       <div class="col-25">
         <label for="comments">Comments</label>

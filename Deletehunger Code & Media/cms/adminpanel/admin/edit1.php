@@ -6,20 +6,17 @@ if(isset($_SESSION['id'])&& isset($_SESSION['use_name'])){
 
 
 <?php
- $servername="127.0.0.1:3306";
- $username="u130083126_deletehunger";
- $password="Deletehunger@2024";
- $databse="u130083126_deletehunger";
+$servername = "localhost";   // or 127.0.0.1
+$username   = "root";        // XAMPP default user
+$password   = "";            // blank by default
+$database   = "deletehunger";
 // create connection
-$connection=new mysqli($servername,$username,$password,$databse);
+$connection = new mysqli($servername, $username, $password, $database);
 
-$venue="";
-$date="";
-$time="";
-$people="";
-$comments="";
-$name="";
-$status="";
+$user_name="";
+$password="";
+$location="";
+
 
 $errorMessage="";
 $successMessage="";
@@ -27,48 +24,42 @@ $successMessage="";
 if($_SERVER['REQUEST_METHOD']=='GET'){
     // GET METHD; SHOW THE DATA OF CLIENT
     if(!isset($_GET["id"])){
-        header("location: index.php");
+        header("location: register.php");
         exit;
     }
 
     $id=$_GET["id"];
     // read the ROW OF SELECTED CLIENT FROM DATABASE
-    $sql="SELECT * FROM details WHERE id=$id";
+    $sql="SELECT * FROM users WHERE id=$id";
     $result=$connection->query($sql);
     $row=$result->fetch_assoc();
 
     if(!$row){
-        header("location: index.php");
+        header("location: register.php");
         exit;
     }
 
-    $name=$row["name"];
-    $venue=$row["venue"];
-    $date=$row["date"];
-    $time=$row["time"];
-    $people=$row["people"];
-    $status=$row['status'];
-    $comments=$row["comments"];
+    $user_name=$row["user_name"];
+    $password=$row["password"];
+    $location=$row["location"];
+    
     
 }else{
     // POST METD: uPDATE THE DATA OF THE CLIENT
      
     $id=$_POST["id"];
-    $venue=$_POST["venue"];
-    $date=$_POST["date"];
-    $time=$_POST["time"];
-    $people=$_POST["people"];
-    $comments=$_POST["comments"];
-    $status=$_POST['status'];
-    $name=$_POST["name"];
+    $user_name=$_POST["user_name"];
+    $password=$_POST["password"];
+    $location=$_POST["location"];
+  
     do{
-        if(empty($id)||empty($venue)|| empty($date)|| empty($time)||empty($people)||empty($comments)||empty($name)||empty($status)){
+        if(empty($id)||empty($user_name)|| empty($password)|| empty($location)){
             $errorMessage="All fields are Required";
             break;
         }
 
         
-        $sql="UPDATE details SET name = '$name', venue = '$venue',date='$date',time='$time',people='$people',comments='$comments',status='$status' WHERE id = '$id'";
+        $sql="UPDATE users SET  user_name = '$user_name',password='$password',location='$location' WHERE id = '$id'";
         
         $result = $connection->query($sql);
 
@@ -78,7 +69,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         }
 
         $successMessage="Client updated correctly";
-        header("location: index.php");
+        header("location: register.php");
         exit;
 
     }while(false);
@@ -111,48 +102,25 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         <form method="post">
             <input type="hidden" name="id" value="<?php echo $id; ?>">
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Venue</label>
+                <label class="col-sm-3 col-form-label">user_name</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="venue" value="<?php echo $venue; ?>" >
+                    <input type="text" class="form-control" name="user_name" value="<?php echo $user_name; ?>" >
                 </div>
             </div>
             <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">date</label>
+            <label class="col-sm-3 col-form-label">password</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="date" value="<?php echo $date; ?>" >
+                    <input type="text" class="form-control" name="password" value="<?php echo $password; ?>" >
                 </div>
             </div>
             <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">time</label>
+            <label class="col-sm-3 col-form-label">location</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="time" value="<?php echo $time; ?>" >
+                    <input type="text" class="form-control" name="location" value="<?php echo $location; ?>" >
                 </div>
             </div>
-            <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">people</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="people" value="<?php echo $people; ?>" >
-                </div>
-            </div>
-            <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">name</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="name" value="<?php echo $name; ?>" >
-                </div>
-            </div>
-            
-            <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">comments</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="comments" value="<?php echo $comments; ?>" >
-                </div>
-            </div>
-            <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">status</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="status" value="<?php echo $status; ?>" >
-                </div>
-            </div>
+           
+           
             
            
            
@@ -176,7 +144,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
                     <button type="submit" class="btn btn-primary" >Submit</button>
                 </div>
                 <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="index.php" role="button">cancel</a>
+                    <a class="btn btn-outline-primary" href="register.php" role="button">cancel</a>
                 </div>
             </div>
         </form>

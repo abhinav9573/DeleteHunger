@@ -1,17 +1,17 @@
 <?php
 session_start();
 
-if(isset($_SESSION['id'])&& isset($_SESSION['use_name'])){
+if(isset($_SESSION['id'])&& isset($_SESSION['user_name'])){
  
     ?>
 
 <?php
- $servername="127.0.0.1:3306";
- $username="u130083126_deletehunger";
- $password="Deletehunger@2024";
- $databse="u130083126_deletehunger";
+$servername = "localhost";   // or 127.0.0.1
+$username   = "root";        // XAMPP default user
+$password   = "";            // blank by default
+$database   = "deletehunger";
 // create connection
-$connection=new mysqli($servername,$username,$password,$databse);
+$connection = new mysqli($servername, $username, $password, $database);
 
 $id="";
 $name="";
@@ -32,7 +32,7 @@ $successMessage="";
 
 if($_SERVER['REQUEST_METHOD']=='GET'){
     if(!isset($_GET["id"])){
-        header("location: index.php");
+        header("location: log.php");
         exit;
     }
 
@@ -49,7 +49,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         }
 
         
-        $sql="UPDATE details SET status = 'completed'  WHERE id = '$id'";
+        $sql="UPDATE details SET status = 'cancelled'  WHERE id = '$id'";
         
         $result = $connection->query($sql);
 
@@ -59,7 +59,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         }
 
         $successMessage="Client updated correctly";
-        header("location: index.php");
+        header("location: log.php");
         exit;
 
     }while(false);

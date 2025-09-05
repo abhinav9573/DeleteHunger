@@ -5,12 +5,12 @@ if(isset($_SESSION['id'])&& isset($_SESSION['use_name'])){
     ?>
 
 <?php
-$servername="127.0.0.1:3306";
-$username="u130083126_deletehunger";
-$password="Deletehunger@2024";
-$databse="u130083126_deletehunger";
+$servername = "localhost";   // or 127.0.0.1
+$username   = "root";        // XAMPP default user
+$password   = "";            // blank by default
+$database   = "deletehunger";
 // create connection
-$connection=new mysqli($servername,$username,$password,$databse);
+$connection = new mysqli($servername, $username, $password, $database);
 
 
 $user_name="";
@@ -86,7 +86,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     </a>
     <img src="../img/logo.jpg" style="width:45%;" class="w3-round"><br><br>
     <h4><b>Admin Panel</b></h4>
-    <p class="w3-text-grey"><?php echo $_SESSION['user_name'] ?></p>
+    <p class="w3-text-grey"><?php echo $_SESSION['use_name'] ?></p>
   </div>
   <div class="w3-bar-block">
     <a href="index.php" class="w3-bar-item w3-button w3-padding  "><i class="fa fa-user fa-fw w3-margin-right"></i>Log</a> 

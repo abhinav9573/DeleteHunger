@@ -6,12 +6,12 @@ if(isset($_SESSION['id'])&& isset($_SESSION['use_name'])){
     ?>
 
 <?php
- $servername="127.0.0.1:3306";
- $username="u130083126_deletehunger";
- $password="Deletehunger@2024";
- $databse="u130083126_deletehunger";
+$servername = "localhost";   // or 127.0.0.1
+$username   = "root";        // XAMPP default user
+$password   = "";            // blank by default
+$database   = "deletehunger";
 // create connection
-$connection=new mysqli($servername,$username,$password,$databse);
+$connection = new mysqli($servername, $username, $password, $database);
 
 $id="";
 $name="";
